@@ -17,6 +17,10 @@ jobs:
           name: deploy to S3
           branch: master
           command: aws s3 sync . s3://hackertracker.info/ --region us-east-1 --acl public-read
+      - run:
+          name: invalidate cloudfront
+          branch: master
+          command: aws cloudfront create-invalidation --distribution-id E1KG3LJZJNIP22 --paths /index.html 
 
 workflows:
   version: 2
