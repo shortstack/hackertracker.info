@@ -2,7 +2,7 @@ version: 2
 jobs:
   deploy:
     docker:
-      - image: circleci/python:2.7
+      - image: circleci/python:3.6.1
     working_directory: ~/hackertracker.info
     steps:
       - checkout
@@ -11,18 +11,7 @@ jobs:
           command: sudo pip install awscli
       - run:
           name: remove .git and .circleci
-          branch: master
           command: rm -rf .git && rm -rf .gitignore && rm -rf .circleci
       - run:
           name: deploy to S3
-          branch: master
           command: aws s3 sync . s3://hackertracker.info/ --region us-east-1 --acl public-read
-
-workflows:
-  version: 2
-  build-deploy:
-    jobs:
-      - deploy:
-          filters:
-            branches:
-              only: master
