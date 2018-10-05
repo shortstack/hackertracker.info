@@ -20,7 +20,7 @@ jobs:
       - run:
           name: invalidate cloudfront
           branch: master
-          command: aws cloudfront create-invalidation --distribution-id E1KG3LJZJNIP22 --paths /
+          command: aws cloudfront create-invalidation --distribution-id E1KG3LJZJNIP22 --paths / /privacy-policy.html /index.html
 
 workflows:
   version: 2
